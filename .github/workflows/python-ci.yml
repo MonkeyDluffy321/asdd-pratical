@@ -1,0 +1,24 @@
+name: Python CI
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install pytest
+        run: pip install pytest
+
+      - name: Run Program and Tests
+        run: |
+          printf '85\n78\n92\n88\n75\n' | python grade_calculator.py
+          python -m pytest -v
